@@ -1,0 +1,5 @@
+MAIL FROM: <email1@gmail.com>
+RCPT TO: <firstname_lastname@gmail.com>
+DATA
+message body
+.

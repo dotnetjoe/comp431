@@ -1,0 +1,4 @@
+MAIL FROM: <jasleen@cs.unc.edu>
+250 OK
+DATA
+503 Bad sequence of commands

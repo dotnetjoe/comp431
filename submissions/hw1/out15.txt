@@ -1,0 +1,8 @@
+MAIL FROM: <jasleen@cs.unc.edu>
+250 OK
+RCPT TO: <smithfd@cs.unc.edu>
+250 OK
+DATA
+354 Start mail input; end with . on a line by itself
+Hey Don, do you really think we should use SMTP as a class
+project in COMP 431 this year? The smart students are going to

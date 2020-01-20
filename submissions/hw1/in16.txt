@@ -1,0 +1,8 @@
+MAIL FROM: <jasleen@cs.unc.edu>  
+RCPT TO: <smithfd@cs.unc.edu>	
+DATA  
+Hey Don, do you really think we should use SMTP as a class
+project in COMP 431 this year? The smart students are going to
+figure out automated ways to use this project to send
+anonymous SPAM to the world!
+.

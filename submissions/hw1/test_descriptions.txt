@@ -1,0 +1,17 @@
+1) Example well-formed sequence (from assignment writeup)
+2) Another simple well-formed sequence with different email addresses
+3) Two well-formed emails in one sequence
+4) First 500 error example (from assignment writeup)
+5) Second 500 error example (from assignment writeup)
+6) First 501 error example (from assignment writeup)
+7) Second 501 error example (from assignment writeup)
+8) 500 error taking precedence over 501 errors (from assignment writeup)
+9) 503 error taking precedence over 501 errors
+10) Simple 503 error with DATA coming before RCPT TO
+11) Example with sequence continuing after a 500 error
+12) Example with sequence continuing after a 501 error
+13) Example with sequence continuing after a 503 error
+14) Example with multiple spaces and tabs in SMTP commands
+15) Ill-formed sequence where EOF is reached before end of data
+16) Well-formed sequence with spaces and tabs after SMTP commands
+
