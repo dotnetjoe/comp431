@@ -1,0 +1,2 @@
+RCPT TO: <smithfdcs.unc.edu>
+503 Bad sequence of commands

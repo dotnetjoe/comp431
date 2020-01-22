@@ -15,7 +15,7 @@ def checkFrom(fromInput):
 
 def specialCharacters(str):
     for x in str:
-        if (x == '<' or x == '>' or x=='(' or x == ')' or x =='[' or x == ']' or x == '\\' or x == '.' or x == ',' or x == ';' or x == ':' or x == '@' or x == " " or x == "\t" ):
+        if (x == '<' or x == '>' or x=='(' or x == ')' or x =='[' or x == ']' or x == '\\' or x == '.' or x == ',' or x == ';' or x == ':' or x == '@' or x == '"' ):
             return False
     return True
 
@@ -86,10 +86,10 @@ def mailCommands(token, string, status):
                 else:
                     return status, ""
             else:
-                print ("503 Bad sequence of commands")
+                print("503 Bad sequence of commands",end="\r\n")
                 return status, ""
         else:
-            print("500 Syntax error: command unrecognized")
+            print("500 Syntax error: command unrecognized",end="\r\n")
             return status, ""
 
     elif token == "mail":
@@ -99,7 +99,7 @@ def mailCommands(token, string, status):
             else:
                 return False
         else:
-            print("500 Syntax error: command unrecognized")
+            print("500 Syntax error: command unrecognized",end="\r\n")
             return False
 
     elif token == "from":
@@ -110,10 +110,10 @@ def mailCommands(token, string, status):
                 else:
                     return False
             else:
-                print ("503 Bad sequence of commands")
+                print ("503 Bad sequence of commands",end="\r\n")
                 return False
         else:
-            print("500 Syntax error: command unrecognized")
+            print("500 Syntax error: command unrecognized",end="\r\n")
             return False
 
 
@@ -124,7 +124,7 @@ def mailCommands(token, string, status):
             else:
                 return False
         else:
-            print("500 Syntax error: command unrecognized")
+            print("500 Syntax error: command unrecognized",end="\r\n")
             return False
 
     elif token == "to":
@@ -135,11 +135,11 @@ def mailCommands(token, string, status):
                 else:
                     return False
             else:
-                print ("503 Bad sequence of commands")
+                print ("503 Bad sequence of commands",end="\r\n")
                 return False
 
         else:
-            print("500 Syntax error: command unrecognized")
+            print("500 Syntax error: command unrecognized",end="\r\n")
             return False
 
     elif token == "DATA":
@@ -149,7 +149,7 @@ def mailCommands(token, string, status):
             else:
                 return False
         else:
-            print("500 Syntax error: command unrecognized")
+            print("500 Syntax error: command unrecognized",end="\r\n")
             return False
 
 
@@ -178,7 +178,7 @@ def mailCommands(token, string, status):
             else:
                 return False
         else:
-            print ("501 Syntax error in parameters or arguments")
+            print ("501 Syntax error in parameters or arguments",end="\r\n")
             return False
 
 
@@ -208,10 +208,10 @@ def mailCommands(token, string, status):
                 else:
                     return False
             else:
-                print("501 Syntax error in parameters or arguments")
+                print("501 Syntax error in parameters or arguments",end="\r\n")
                 return False
         else:
-            print ("501 Syntax error in parameters or arguments")
+            print ("501 Syntax error in parameters or arguments",end="\r\n")
             return False
 
     elif token == "domain":
@@ -227,37 +227,37 @@ def mailCommands(token, string, status):
                 else:
                     return False
             else:
-                print ("501 Syntax error in parameters or arguments")
+                print ("501 Syntax error in parameters or arguments",end="\r\n")
                 return False
         else:
-            print ("501 Syntax error in parameters or arguments")
+            print ("501 Syntax error in parameters or arguments",end="\r\n")
             return False
 
     elif token == "CRLF":
-        if string == "\n" and status == 3:
-            print ("503 Bad sequence of commands")
+        if string == "\r\n" and status == 3:
+            print ("354 Start mail input; end with . on a line by itself",end="\r\n")
             return True
-        elif string =="\n":
-            print ("250 OK")
+        elif string =="\r\n":
+            print ("250 OK",end="\r\n")
             return True
         else:
-            print ("501 Syntax error in parameters or arguments")
+            print ("501 Syntax error in parameters or arguments",end="\r\n")
             return False
     else:
-        print("helpme")
+        print("I cant do this")
 
 
 def writeEmail(message):
     dataInput = ""
     totalMessage = ""
-    while dataInput != ".\n" and dataInput != ".":
+    while dataInput != ".\r\n" and dataInput != ".":
         dataInput = stdin.readline()
-        if dataInput != ".\n":
+        if dataInput != ".\r\n":
             totalMessage += dataInput
         if len(dataInput) == 0:
             return False
-        if dataInput == ".\n":
-            print(dataInput + '250 OK')
+        if dataInput == ".\r\n":
+            print (dataInput + '250 OK',end="\r\n")
         else:
             print(dataInput.rstrip("\n"))
     splitMessage = message.split("\n")
@@ -266,10 +266,10 @@ def writeEmail(message):
         fileName = "forward/" + splitMessage[x][findLeft(splitMessage[x])+1:findRight(splitMessage[x])]
         fileWriter = open((fileName), "a")
 
-        fileWriter.write("From: " + sender + "\n")
+        fileWriter.write("From: " + sender + "\r\n")
         for y in range(1, len(splitMessage) - 1):
             receiver = splitMessage[y][findLeft(splitMessage[y]):findRight(splitMessage[y]) + 1]
-            fileWriter.write("To: " + receiver+ "\n")
+            fileWriter.write("To: " + receiver+ "\r\n")
         fileWriter.write(totalMessage)
     return True
 

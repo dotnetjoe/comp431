@@ -14,3 +14,13 @@ anonymous SPAM to the world!
 500 Syntax error: command unrecognized
 .
 500 Syntax error: command unrecognized
+MAIL FROM: <email1@gmail.com>
+501 Syntax error in parameters or arguments
+RCPT TO: <firstname_lastname@gmail.com>
+503 Bad sequence of commands
+DATA
+503 Bad sequence of commands
+message body
+500 Syntax error: command unrecognized
+.
+500 Syntax error: command unrecognized

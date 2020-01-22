@@ -8,9 +8,3 @@ Hey Don, do you really think we should use SMTP as a class
 500 Syntax error: command unrecognized
 project in COMP 431 this year? The smart students are going to
 500 Syntax error: command unrecognized
-figure out automated ways to use this project to send
-500 Syntax error: command unrecognized
-anonymous SPAM to the world!
-500 Syntax error: command unrecognized
-.
-500 Syntax error: command unrecognized

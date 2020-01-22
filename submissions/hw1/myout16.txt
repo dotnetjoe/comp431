@@ -1,8 +1,8 @@
-MAIL FROM: <jasleen@cs.unc.edu>
+MAIL FROM: <jasleen@cs.unc.edu>  
 501 Syntax error in parameters or arguments
-RCPT TO: <smithfd@cs.unc.edu>
+RCPT TO: <smithfd@cs.unc.edu>	
 503 Bad sequence of commands
-DATA
+DATA  
 503 Bad sequence of commands
 Hey Don, do you really think we should use SMTP as a class
 500 Syntax error: command unrecognized

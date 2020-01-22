@@ -1,0 +1,4 @@
+MAIL FROM: <jasleen@cs.unc.edu>
+501 Syntax error in parameters or arguments
+RCPT TO : < ivysat@cs.unc.edu>
+500 Syntax error: command unrecognized
