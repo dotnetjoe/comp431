@@ -1,4 +1,4 @@
 MAIL FROM: <jasleen@cs.unc.edu>
-501 Syntax error in parameters or arguments
+250 OK
 DATA
 503 Bad sequence of commands

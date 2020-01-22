@@ -2,36 +2,42 @@ from sys import stdin
 import os
 
 def checkMail(mail):
-    if mail == "MAIL" or mail == "mail":
+    if mail == "MAIL":
         return True
     else:
         return False
 
 def checkFrom(fromInput):
-    if fromInput == "FROM:" or fromInput == "from:":
+    if fromInput == "FROM:":
         return True
     else:
         return False
 
 def specialCharacters(str):
+    # check for special characters
     for x in str:
-        if (x == '<' or x == '>' or x=='(' or x == ')' or x =='[' or x == ']' or x == '\\' or x == '.' or x == ',' or x == ';' or x == ':' or x == '@' or x == '"' ):
+        if (x == '<' or x == '>' or x=='(' or x == ')' or x =='[' or x == ']' or x == '\\' or 
+            x == '.' or x == ',' or x == ';' or x == ':' or x == '@' or x == '"' or x == ' ' ):
+            # every speacial character contained in a MAIL RCT or DATA
             return False
     return True
 
 def letters(domain):
+    # check for letters
     for x in domain:
         if x.isalpha() == False :
             return False
     return True
 
-def numbers(domain):
+def numbers(domain): 
+    # check for numbers
     for x in domain:
         if x.isdigit() == False :
             return False
     return True
 
 def checkDomain(domain):
+    # check the email domain
     for characters in domain:
         if characters == " " or characters =="\t":
             return False
@@ -56,16 +62,19 @@ def whiteSpace(string):
 
 
 def findLeft(string):
+    # left angle bracket to split email
     return string.find("<")
 
 def findRight(string):
+    # right angle bracket to split email
     return string.find(">")
 
 
 def mailCommands(token, string, status):
     if token == "start":
         if checkMail(string[:4]) and checkMail(string.split()[0]):
-            if mailCommands("mail", string, status): # guarantees message is all okay
+            if mailCommands("mail", string, status): 
+                # check to see if message is valid and parsable
                 return 1, string
             else:
                 return status, ""
@@ -73,7 +82,6 @@ def mailCommands(token, string, status):
 
 
         elif string[:4] == "RCPT":
-
                 if mailCommands("RCPT", string, status):
                     return 2, string
                 else:
@@ -266,10 +274,10 @@ def writeEmail(message):
         fileName = "forward/" + splitMessage[x][findLeft(splitMessage[x])+1:findRight(splitMessage[x])]
         fileWriter = open((fileName), "a")
 
-        fileWriter.write("From: " + sender + "\r\n")
+        fileWriter.write("FROM: " + sender + "\r\n")
         for y in range(1, len(splitMessage) - 1):
             receiver = splitMessage[y][findLeft(splitMessage[y]):findRight(splitMessage[y]) + 1]
-            fileWriter.write("To: " + receiver+ "\r\n")
+            fileWriter.write("TO: " + receiver + "\r\n")
         fileWriter.write(totalMessage)
     return True
 

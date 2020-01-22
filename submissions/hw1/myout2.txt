@@ -1,10 +1,9 @@
 MAIL FROM: <email1@gmail.com>
-501 Syntax error in parameters or arguments
+250 OK
 RCPT TO: <firstname_lastname@gmail.com>
-503 Bad sequence of commands
+250 OK
 DATA
-503 Bad sequence of commands
+354 Start mail input; end with . on a line by itself
 message body
-500 Syntax error: command unrecognized
 .
-500 Syntax error: command unrecognized
+250 OK

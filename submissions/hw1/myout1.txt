@@ -1,16 +1,12 @@
 MAIL FROM: <jasleen@cs.unc.edu>
-501 Syntax error in parameters or arguments
+250 OK
 RCPT TO: <smithfd@cs.unc.edu>
-503 Bad sequence of commands
+250 OK
 DATA
-503 Bad sequence of commands
+354 Start mail input; end with . on a line by itself
 Hey Don, do you really think we should use SMTP as a class
-500 Syntax error: command unrecognized
 project in COMP 431 this year? The smart students are going to
-500 Syntax error: command unrecognized
 figure out automated ways to use this project to send
-500 Syntax error: command unrecognized
 anonymous SPAM to the world!
-500 Syntax error: command unrecognized
 .
-500 Syntax error: command unrecognized
+250 OK
