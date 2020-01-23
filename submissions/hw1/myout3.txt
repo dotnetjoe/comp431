@@ -10,3 +10,12 @@ figure out automated ways to use this project to send
 anonymous SPAM to the world!
 .
 250 OK
+MAIL FROM: <email1@gmail.com>
+250 OK
+RCPT TO: <firstname_lastname@gmail.com>
+250 OK
+DATA
+354 Start mail input; end with . on a line by itself
+message body
+.
+250 OK
