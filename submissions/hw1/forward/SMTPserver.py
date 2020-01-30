@@ -21,47 +21,36 @@ def message501():
     
 def message503():
     print("503 Bad sequence of commands",end="\r\n")
-    
-def regularExpression(text,mail):
-    mailFrom = re.match('MAIL\s+FROM:\s*<(\w+@(?:(?:[a-zA-Z0-9])+\.)+\w+)>\s*$', text)
-    rcptto = re.match('RCPT\s+TO:\s*<(\w+@(?:(?:[a-zA-Z0-9])+\.)+\w+)>\s*$', text)
-    data = re.match('(DATA\s*$)', text)
-    
-    # append to mail if no error exists
-    if mailFrom:
-        mail.append(mailFrom.group(0))
-        return True
-    elif rcptto:
-        mail.append(rcptto.group(0))
-        mail.append(rcptto.group(1))
-        return True
-    elif data:
-        mail.append(data.group(1))
-        return True
-    else:
-        return False
 
-
+# return True if there is 501 error exist
+# if there is no 501 error, append the data to the mail
 def check501Error(text,token,mail):
     if(token != 'mailFromToken' and token != 'dataToken' and token != 'rcptToken' ):
         return True
     if(token == 'mailFromToken'):
-        if regularExpression(text,mail):
+        mailFrom = re.match('MAIL\s+FROM:\s*<(\w+@(?:(?:[a-zA-Z0-9])+\.)+\w+)>\s*$', text)# make sure data has no parameter after token
+        if mailFrom:
+            mail.append(mailFrom.group(0))
             message250()
             return False
         else:
             message501()
             return True
     elif(token == 'rcptToken'):
-        if regularExpression(text,mail):
+        rcpt = re.match('RCPT\s+TO:\s*<(\w+@(?:(?:[a-zA-Z0-9])+\.)+\w+)>\s*$', text)
+        if rcpt:
+            mail.append(rcpt.group(0))# append the full path of the RCPT
+            mail.append(rcpt.group(1))# append only the mailadress
             message250()
             return False
         else:
             message501()
             return True
     elif(token == 'dataToken'):
-        if regularExpression(text,mail):
-            message354()
+        DATA = re.match('(DATA\s*$)', text)# make sure data has no parameter after token
+        if DATA:
+            mail.append(DATA.group(1))
+            message354
             return False
         else:
             message501()
@@ -104,8 +93,7 @@ def checkToken(token, text):
 
     message500()
     return False
-    
-def parseMAIL(mail):
+def checkMailFrom(mail):
     while(True):
         text = process_input()
         #check if token is out of order
@@ -119,7 +107,7 @@ def parseMAIL(mail):
             else:
                 continue
 
-def parseRCPT(mail):# check for RCPT
+def checkRcpt(mail):# check for RCPT
     while(True):
         text = process_input()
         #check if token is out of order
@@ -133,14 +121,14 @@ def parseRCPT(mail):# check for RCPT
             else:
                 continue
 
-def parseDATA(mail):
+def checkData(mail):
     while(True):
         text =process_input()
         status = checkToken('dataToken', text)
         if(status == False):            # if the token is not right, 500 or 503
             continue
         else:
-            ErrorStatus501 = check501Error(text,'dataToken',mail)
+            ErrorStatus501 = check501Error(text, 'dataToken',mail)
             if (ErrorStatus501 == False):
                 content=[]
                 while(True):
@@ -159,25 +147,26 @@ def parseDATA(mail):
 def writeEmail(mail):
     fileName = "forward/"+'<'+mail[2]+'>'
     fileWriter = open((fileName), "a+")
-    fileWriter.write(mail[0]+ "\r\n")     #mail
-    fileWriter.write(mail[1]+ "\r\n")     #rcpt
-    fileWriter.write(mail[3]+ "\r\n")     #data
+    fileWriter.write(mail[0]+ "\n")     #MAil From
+    fileWriter.write(mail[1]+ "\n")     #RCPT
+    fileWriter.write(mail[3]+ "\n")     #DATA
     for i in range(len(mail[4])):
         receiver = mail[4][i]
-        fileWriter.write(receiver+ "\r\n")
+        fileWriter.write(receiver+ "\n")
 
 
+i = 1
 mailRecord = []
 
-while(True):
+while(i == 1):
     mail = []
-    #mail[0] mail, mail[1], rcpt, mail[2] data
-    mailFromstatus = parseMAIL(mail)
+    mailFromstatus = checkMailFrom(mail)
     if mailFromstatus == True:          # check for RCPT
-        rcptStatus = parseRCPT(mail)
+        rcptStatus = checkRcpt(mail)
         if rcptStatus == True:
-            parseDATA(mail)
+            checkData(mail)
             mailRecord.append(mail)
             writeEmail(mail)
+
     else:
         continue
